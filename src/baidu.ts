@@ -1,5 +1,6 @@
 import axios from 'axios'
 import type { BaiduOptions } from './types'
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const md5 = require('md5')
 
 function getTranslate(text: string, options: BaiduOptions = {}) {
@@ -13,7 +14,7 @@ function getTranslate(text: string, options: BaiduOptions = {}) {
     axios.get(`http://api.fanyi.baidu.com/api/trans/vip/translate?q=${text}&from=${from}&to=${to}&appid=${appid}&salt=${salt}&sign=${sign}`)
       .then(({ data: { error_code, error_msg, trans_result } }) => {
         if (error_code)
-          return reject({ code: error_code, msg: error_msg })
+          return reject(new Error(error_msg))
         resolve(trans_result[0].dst)
       }).catch(reject)
   })
