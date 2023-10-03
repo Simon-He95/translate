@@ -29,7 +29,7 @@ function getTranslate(text: string, options: BaiduOptions = {}) {
     axios.get(`http://api.fanyi.baidu.com/api/trans/vip/translate?q=${text}&from=${from}&to=${to}&appid=${appid}&salt=${salt}&sign=${sign}`)
       .then(({ data: { error_code, error_msg, trans_result } }) => {
         if (+error_code !== 52000)
-          return reject(new Error(errCodeMap[error_msg] || error_msg))
+          return reject(new Error(errCodeMap[error_code] || error_msg))
         resolve(trans_result[0].dst)
       }).catch(reject)
   })
