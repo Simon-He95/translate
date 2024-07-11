@@ -3,15 +3,19 @@ import { hasChineseCharacters } from './utils'
 const { translate } = require('bing-translate-api')
 
 export function fanyi(cacheMap = new Map()) {
-  return async (text: string): Promise<string> => {
+  return async (text: string, to?: 'en' | 'zh'): Promise<string> => {
     if (!text)
       return ''
     if (cacheMap.has(text))
       return cacheMap.get(text)
 
-    const res = await translate(text, null, hasChineseCharacters(text) ? 'en' : 'zh-Hans')
-    const result = res.translation
+    const target = to
+      ? to === 'en' ? 'en' : 'zh-Hans'
+      : hasChineseCharacters(text) ? 'en' : 'zh-Hans'
+
+    const result = (await translate(text, null, target)).translation
     cacheMap.set(text, result)
+
     return result
   }
 }

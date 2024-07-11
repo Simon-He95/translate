@@ -7,7 +7,8 @@ import translateLoader from '@simon_he/translate'
 
 const translate = translateLoader()
 
-const translated = await translate('hello') // 你好
+const translated = await translate('hello') // ['你好']
+const multipleTranslated = await translate(['hello', 'world']) // ['你好', '世界']
 ```
 
 ## Install
