@@ -61,9 +61,11 @@ function translateLoader(cacheMap = new Map()) {
       if (isBreak)
         break
       const text = texts[i]
-      google(text, to).then(r => resolver(r, i)).catch(() => rejecter(i))
-      bing(text, to).then(r => resolver(r, i)).catch(() => rejecter(i))
-      deeplx(text).then(r => resolver(r, i)).catch(() => rejecter(i))
+      Promise.any([
+        google(text, to),
+        bing(text, to),
+        deeplx(text),
+      ]).then(r => resolver(r, i)).catch(() => rejecter(i))
     }
   })
 }
