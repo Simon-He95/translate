@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest'
+import translateLoader from '../src'
 
 describe('should', () => {
-  it('exported', () => {
-    expect(1).toEqual(1)
+  const translate = translateLoader()
+  it('exported', async () => {
+    expect((await translate('你好'))[0]).toEqual('Hello')
   })
 })
