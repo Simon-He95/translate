@@ -29,15 +29,9 @@ importers:
       eslint:
         specifier: ^9.23.0
         version: 9.23.0
-      esno:
-        specifier: ^0.16.3
-        version: 0.16.3
       google-translate-api:
         specifier: ^2.3.0
         version: 2.3.0
-      libretranslate:
-        specifier: ^1.0.1
-        version: 1.0.1
       lint-staged:
         specifier: ^13.3.0
         version: 13.3.0
@@ -1677,10 +1671,6 @@ packages:
       jiti:
         optional: true
 
-  esno@0.16.3:
-    resolution: {integrity: sha512-6slSBEV1lMKcX13DBifvnDFpNno5WXhw4j/ff7RI0y51BZiDqEe5dNhhjhIQ3iCOQuzsm2MbVzmwqbN78BBhPg==}
-    hasBin: true
-
   espree@10.3.0:
     resolution: {integrity: sha512-0QYC8b24HWY8zjRnDTL6RiHfDbAWn63qb4LMj1Z4b076A4une81+z03Kg7l7mn/48PUTqoLptSXez8oknU8Clg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -2098,9 +2088,6 @@ packages:
   levn@0.4.1:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
     engines: {node: '>= 0.8.0'}
-
-  libretranslate@1.0.1:
-    resolution: {integrity: sha512-+GVBAaoS5dOKw86uRY71KebeXXECLAkyaIjUgcGKdJADY2yeCmJCYUDgD0DHWldnV9OKFmYL+weIAUeG7au5fw==}
 
   lilconfig@2.1.0:
     resolution: {integrity: sha512-utWOt/GHzuUxnLKxB6dk81RoOeoNeHgbrXiuGk4yyF5qlRz+iIVWu56E2fqGHFrXz0QNUhLB/8nKqvRH66JKGQ==}
@@ -4777,10 +4764,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  esno@0.16.3:
-    dependencies:
-      tsx: 3.14.0
-
   espree@10.3.0:
     dependencies:
       acorn: 8.14.0
@@ -5228,11 +5211,6 @@ snapshots:
     dependencies:
       prelude-ls: 1.2.1
       type-check: 0.4.0
-
-  libretranslate@1.0.1:
-    dependencies:
-      '@types/node': 18.19.81
-      typescript: 4.9.5
 
   lilconfig@2.1.0: {}
 

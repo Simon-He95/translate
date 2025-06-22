@@ -1,7 +1,7 @@
 {
   "name": "@simon_he/translate",
   "version": "0.0.10",
-  "description": "",
+  "description": "A fast, robust, and lightweight translation library supporting multiple translation services (Google, Bing, DeepL) with automatic fallback, batch processing, and TypeScript support.",
   "author": "Simon He",
   "license": "MIT",
   "funding": "https://github.com/sponsors/Simon-He95",
@@ -12,7 +12,37 @@
   },
   "bugs": "https://github.com/Simon-He95/translate/issues",
   "keywords": [
-    "translate"
+    "translate",
+    "translation",
+    "translator",
+    "google-translate",
+    "bing-translate",
+    "deepl",
+    "deeplx",
+    "i18n",
+    "internationalization",
+    "localization",
+    "multilingual",
+    "language",
+    "text-translation",
+    "batch-translation",
+    "auto-translate",
+    "machine-translation",
+    "typescript",
+    "nodejs",
+    "javascript",
+    "es6",
+    "esm",
+    "cjs",
+    "promise",
+    "async",
+    "api",
+    "fallback",
+    "robust",
+    "fast",
+    "lightweight",
+    "reliable",
+    "cross-platform"
   ],
   "sideEffects": false,
   "exports": {
@@ -36,6 +66,9 @@
   "files": [
     "dist"
   ],
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "scripts": {
     "build": "tsup ./src/index.ts --format cjs,esm --dts --clean --minify --splitting",
     "dev": "npm run build -- --watch src",
@@ -44,8 +77,11 @@
     "lint:fix": "pnpm run lint --fix",
     "prepublishOnly": "nr build",
     "release": "bumpp && npm publish",
-    "start": "esno src/index.ts",
     "test": "vitest",
+    "test:performance": "tsx test/performance-script.ts",
+    "test:stress": "tsx test/stress-script.ts",
+    "test:benchmark": "tsx test/benchmark-script.ts",
+    "test:all": "npm run test && npm run test:performance && npm run test:benchmark",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
@@ -56,9 +92,7 @@
     "bumpp": "^8.2.1",
     "deeplx": "^0.1.3",
     "eslint": "^9.23.0",
-    "esno": "^0.16.3",
     "google-translate-api": "^2.3.0",
-    "libretranslate": "^1.0.1",
     "lint-staged": "^13.3.0",
     "picocolors": "^1.1.1",
     "prettier": "^2.8.8",

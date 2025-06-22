@@ -28,52 +28,51 @@ function translateLoader(cacheMap = createLimitedCache()) {
   return (texts: string | string[], to?: 'en' | 'zh'): Promise<string[]> => new Promise((resolve, reject) => {
     if (typeof texts === 'string')
       texts = [texts]
-    texts = texts.filter(Boolean)
+    // 过滤掉空字符串和只包含空白字符的字符串
+    texts = texts.filter(text => text && text.trim().length > 0)
+
+    // 如果过滤后没有有效文本，直接返回空数组
+    if (texts.length === 0) {
+      resolve([])
+      return
+    }
+
     const results: string[] = []
     const status: { fails: number, status: boolean }[] = []
     let isBreak = false
+
+    // 初始化status数组
+    for (let i = 0; i < texts.length; i++) {
+      status[i] = { fails: 0, status: false }
+    }
+
     const resolver = (res: string, i: number) => {
       if (isBreak)
         return
       results[i] = res
       const cacheKey = `${texts[i]}:${to || 'auto'}`
       cacheMap.set(cacheKey, res)
-      if (!status[i]) {
-        status[i] = {
-          fails: 0,
-          status: true,
-        }
-      }
-      else if (!status[i].status) {
-        status[i].status = true
-      }
-      else {
-        return
-      }
 
-      if (status.every(s => s.status))
+      status[i].status = true
+
+      // 检查是否所有任务都完成了
+      if (status.every(s => s.status)) {
         resolve(results)
+      }
     }
     const rejecter = (i: number) => {
-      if (!status[i]) {
-        status[i] = {
-          fails: 1,
-          status: false,
-        }
-      }
-      else if (!status[i].status) {
-        status[i] = {
-          fails: status[i].fails + 1,
-          status: false,
-        }
-      }
-      else {
+      if (isBreak)
         return
-      }
 
-      if (status.some(s => s.fails === concurrentCounts && !s.status)) {
-        reject(new Error('Request failed'))
-        isBreak = true
+      status[i].fails += 1
+
+      if (status[i].fails >= concurrentCounts) {
+        status[i].status = false
+
+        if (status.some(s => s.fails >= concurrentCounts && !s.status)) {
+          reject(new Error('Request failed'))
+          isBreak = true
+        }
       }
     }
     for (let i = 0; i < texts.length; i++) {

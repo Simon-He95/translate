@@ -12,6 +12,6 @@ export function fanyi() {
 
     const result = await translate(text, { to: target })
 
-    return result
+    return result.text
   }
 }
