@@ -1,6 +1,6 @@
 {
   "name": "@simon_he/translate",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "A fast, robust, and lightweight translation library supporting multiple translation services (Google, Bing, DeepL) with automatic fallback, batch processing, and TypeScript support.",
   "author": "Simon He",
   "license": "MIT",
