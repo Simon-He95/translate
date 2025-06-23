@@ -1,6 +1,6 @@
 {
   "name": "@simon_he/translate",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "A fast, robust, and lightweight translation library supporting 5 translation services (Google, Bing, DeepL, MyMemory, Lingva) with automatic fallback, batch processing, caching, and full TypeScript support.",
   "author": "Simon He",
   "license": "MIT",
