@@ -53,6 +53,7 @@ function translateLoader(cacheMap = createLimitedCache()) {
     const resolver = (res: string, i: number) => {
       if (isBreak)
         return
+
       results[i] = res
       const cacheKey = `${texts[i]}:${to || 'auto'}`
       cacheMap.set(cacheKey, res)

@@ -13,7 +13,7 @@ interface MyMemoryResponse {
 }
 
 export function fanyi() {
-  return async (text: string, to: string = 'en', from: string = 'auto'): Promise<{ text: string }> => {
+  return async (text: string, to: string = 'en', from: string = 'auto'): Promise<string> => {
     try {
       // MyMemory doesn't support 'auto', so we need to detect or use a default
       const sourceLanguage = from === 'auto' ? 'en' : from
@@ -36,9 +36,7 @@ export function fanyi() {
         throw new Error(`MyMemory translation failed: ${data.responseDetails}`)
       }
 
-      return {
-        text: data.responseData.translatedText,
-      }
+      return data.responseData.translatedText
     }
     catch (error) {
       throw new Error(`MyMemory translation error: ${error instanceof Error ? error.message : 'Unknown error'}`)

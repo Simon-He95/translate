@@ -20,7 +20,7 @@ const LINGVA_INSTANCES = [
 ]
 
 export function fanyi(apiUrl?: string) {
-  return async (text: string, to: string = 'en', from: string = 'auto'): Promise<{ text: string }> => {
+  return async (text: string, to: string = 'en', from: string = 'auto'): Promise<string> => {
     const instancesToTry = apiUrl ? [apiUrl] : LINGVA_INSTANCES
 
     for (const instance of instancesToTry) {
@@ -46,9 +46,7 @@ export function fanyi(apiUrl?: string) {
           throw new Error('Empty translation response')
         }
 
-        return {
-          text: data.translation,
-        }
+        return data.translation
       }
       catch (error) {
         console.warn(`Lingva instance ${instance} failed:`, error instanceof Error ? error.message : 'Unknown error')
