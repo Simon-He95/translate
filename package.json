@@ -1,7 +1,7 @@
 {
   "name": "@simon_he/translate",
   "version": "0.0.11",
-  "description": "A fast, robust, and lightweight translation library supporting multiple translation services (Google, Bing, DeepL) with automatic fallback, batch processing, and TypeScript support.",
+  "description": "A fast, robust, and lightweight translation library supporting 5 translation services (Google, Bing, DeepL, MyMemory, Lingva) with automatic fallback, batch processing, caching, and full TypeScript support.",
   "author": "Simon He",
   "license": "MIT",
   "funding": "https://github.com/sponsors/Simon-He95",
@@ -19,6 +19,8 @@
     "bing-translate",
     "deepl",
     "deeplx",
+    "mymemory",
+    "lingva",
     "i18n",
     "internationalization",
     "localization",
@@ -28,6 +30,8 @@
     "batch-translation",
     "auto-translate",
     "machine-translation",
+    "free-translation",
+    "open-source-translation",
     "typescript",
     "nodejs",
     "javascript",
@@ -42,7 +46,9 @@
     "fast",
     "lightweight",
     "reliable",
-    "cross-platform"
+    "cross-platform",
+    "multiple-providers",
+    "translation-api"
   ],
   "sideEffects": false,
   "exports": {
@@ -69,19 +75,42 @@
   "engines": {
     "node": ">=14.0.0"
   },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
+  "cpu": [
+    "x64",
+    "arm64"
+  ],
   "scripts": {
     "build": "tsup ./src/index.ts --format cjs,esm --dts --clean --minify --splitting",
     "dev": "npm run build -- --watch src",
+    "demo": "tsx demo.ts",
     "format": "prettier --write --cache .",
     "lint": "eslint . --cache",
     "lint:fix": "pnpm run lint --fix",
     "prepublishOnly": "nr build",
     "release": "bumpp && npm publish",
     "test": "vitest",
+    "test:working": "vitest run test/index.test.ts test/simple.test.ts test/final.test.ts test/mymemory.test.ts test/bing.test.ts --reporter=verbose",
+    "test:reliable": "vitest run test/mymemory.test.ts test/bing.test.ts --reporter=verbose",
+    "test:core": "vitest run test/index.test.ts test/simple.test.ts test/final.test.ts --reporter=verbose",
+    "test:services": "vitest run --reporter=verbose test/google.test.ts test/bing.test.ts test/deeplx.test.ts test/mymemory.test.ts test/lingva.test.ts test/all-services.test.ts",
+    "test:google": "vitest run test/google.test.ts",
+    "test:bing": "vitest run test/bing.test.ts",
+    "test:deeplx": "vitest run test/deeplx.test.ts",
+    "test:mymemory": "vitest run test/mymemory.test.ts",
+    "test:lingva": "vitest run test/lingva.test.ts",
+    "test:integration": "vitest run test/all-services.test.ts",
     "test:performance": "tsx test/performance-script.ts",
     "test:stress": "tsx test/stress-script.ts",
     "test:benchmark": "tsx test/benchmark-script.ts",
-    "test:all": "npm run test && npm run test:performance && npm run test:benchmark",
+    "test:diagnose": "tsx test/diagnose-script.ts",
+    "test:lingva-diagnose": "tsx test/lingva-diagnose.ts",
+    "test:quick": "tsx test/quick-test.ts",
+    "test:all": "npm run test && npm run test:services && npm run test:performance && npm run test:benchmark",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {

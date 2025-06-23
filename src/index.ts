@@ -1,8 +1,10 @@
 import { fanyi as bingFanyi } from './bing'
 import { fanyi as deeplxFanyi } from './deeplx'
 import { fanyi as googleFanyi } from './google'
+import { fanyi as lingvaFanyi } from './lingva'
+import { fanyi as mymemoryFanyi } from './mymemory'
 
-const concurrentCounts = 3
+const concurrentCounts = 6
 
 function createLimitedCache(maxSize = 1000) {
   const cache = new Map()
@@ -24,6 +26,8 @@ function translateLoader(cacheMap = createLimitedCache()) {
   const google = googleFanyi()
   const bing = bingFanyi()
   const deeplx = deeplxFanyi()
+  const mymemory = mymemoryFanyi()
+  const lingva = lingvaFanyi()
 
   return (texts: string | string[], to?: 'en' | 'zh'): Promise<string[]> => new Promise((resolve, reject) => {
     if (typeof texts === 'string')
@@ -88,9 +92,18 @@ function translateLoader(cacheMap = createLimitedCache()) {
         google(text, to),
         bing(text, to),
         deeplx(text, to),
+        mymemory(text, to),
+        lingva(text, to),
       ]).then((r: any) => resolver(r, i)).catch(() => rejecter(i))
     }
   })
 }
 
 export default translateLoader
+
+// Export individual translation services
+export { fanyi as bingTranslate } from './bing'
+export { fanyi as deeplxTranslate } from './deeplx'
+export { fanyi as googleTranslate } from './google'
+export { fanyi as lingvaTranslate } from './lingva'
+export { fanyi as mymemoryTranslate } from './mymemory'
